@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Resume Matcher</title>
+</head>
+<body>
+    <h2>Upload Job Description and CVs</h2>
+    <form id="upload-form" enctype="multipart/form-data">
+        <label for="jd">Job Description (txt, docx, or csv):</label><br>
+        <input type="file" name="jd" accept=".txt,.docx,.csv" required><br><br>
+
+        <label for="cvs">CVs (Multiple files):</label><br>
+        <input type="file" name="cvs" multiple required><br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+
+    <h3>Results:</h3>
+    <ul id="results"></ul>
+
+    <script>
+        document.getElementById("upload-form").addEventListener("submit", function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            fetch("http://localhost:5000/upload", {
+                method: "POST",
+                body: formData
+            })
+            .then(res => res.json())
+            .then(data => {
+                const resultList = document.getElementById("results");
+                resultList.innerHTML = "";
+                data.forEach(item => {
+                    const li = document.createElement("li");
+                    li.textContent = `${item.cv}: ${item.score.toFixed(2)}`;
+                    resultList.appendChild(li);
+                });
+            })
+            .catch(err => console.error(err));
+        });
+    </script>
+</body>
+</html>

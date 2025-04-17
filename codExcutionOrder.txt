@@ -1,0 +1,29 @@
+🧾 Code Execution Order
+Here’s how you’d run the notebooks and scripts:
+
+(optional) Run extract.py
+→ To extract raw data from 7z files in stackexchange/.
+
+Run paragraph_extraction_from_posts.ipynb
+→ Extracts paragraphs from the raw StackExchange files.
+
+Run Sentence_Extraction.ipynb
+→ Prepares sentence data for training.
+
+Train the Word2Vec model (or use pre-trained stackexchange_model)
+
+Run With Word2Vec.ipynb
+→ Test Word2Vec similarity and vectorization.
+
+Run Using Spacy Model.ipynb
+→ Compare how SpaCy performs with basic similarities.
+
+Run get_jd.ipynb
+→ Preprocess job descriptions (jd.csv)
+
+Run Section_Extraction.ipynb
+→ Extracts sections from resumes and saves prc_data.csv.
+
+Run CV_ranking.ipynb
+→ Computes similarity scores and ranks CVs against job descriptions.
+
